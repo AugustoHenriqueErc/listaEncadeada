@@ -8,11 +8,16 @@ public class CircularLinkedList<T> {
         tail = null;
         head = null;
     }
-
-    public void insertFirst(T value){
-        this.insertFirst(new Cell<T>(value));
+    private boolean isEmpty()
+    {
+        if(tail == null &&  head == null) return true;
+        else return false;
     }
-    private void insertFirst(Cell<T> cell){
+
+    public void insertHead(T value){
+        this.insertHead(new Cell<T>(value));
+    }
+    private void insertHead(Cell<T> cell){
         if(tail == null||head == null)
         {
             tail = cell;
@@ -45,6 +50,21 @@ public class CircularLinkedList<T> {
             cell.setNext(head);
             tail = cell;
         }
+    }
+
+    public void removeHead() throws NullPointerException
+    {
+        if(isEmpty()) throw new NullPointerException();
+        else
+        {
+            head = head.getNext();
+            tail.setNext(head);
+        }
+    }
+
+    public void removeTail()
+    {
+
     }
 
     public boolean search(T value)
